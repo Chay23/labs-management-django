@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
-from .manager import UserManager
+from .managers import UserManager
 
 
 class User(AbstractBaseUser):
@@ -11,16 +11,23 @@ class User(AbstractBaseUser):
         unique=True,
     )
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     is_instructor = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
-
-    objects = UserManager()
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
 
+    objects = UserManager()
+
     def __str__(self):
         return self.email
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
 
 
 class UserProfile(models.Model):
