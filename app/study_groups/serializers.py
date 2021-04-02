@@ -6,4 +6,4 @@ from .models import StudyGroup
 class StudyGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudyGroup
-        fields = ["name"]
+        fields = "__all__"
