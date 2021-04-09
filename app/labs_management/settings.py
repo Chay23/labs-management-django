@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'djoser',
     'users',
     'study_groups',
-    'subjects'
+    'subjects',
+    'lectures'
 ]
 
 MIDDLEWARE = [
