@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'study_groups',
     'subjects',
     'lectures',
-    'assignments'
+    'assignments',
+    'submissions'
 ]
 
 MIDDLEWARE = [

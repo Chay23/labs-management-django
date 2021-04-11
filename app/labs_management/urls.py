@@ -23,5 +23,6 @@ urlpatterns = [
     path("api/v1/groups/", include("study_groups.urls")),
     path("api/v1/subjects/", include("subjects.urls")),
     path("api/v1/lectures/", include("lectures.urls")),
-    path("api/v1/assignments/", include("assignments.urls"))
+    path("api/v1/assignments/", include("assignments.urls")),
+    path("api/v1/submissions/", include("submissions.urls"))
 ]
