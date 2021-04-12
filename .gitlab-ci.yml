@@ -22,9 +22,30 @@ build:
     - docker build
       --cache-from $IMAGE:latest
       --tag $IMAGE:latest
-      --file ./Dockerfile.prod
+      --file ./app/Dockerfile.prod
       "."
     - docker push $IMAGE:latest
     - echo "Build successfully!"
   artifacts:
     expire_in: 1 hour
+
+deploy:
+  stage: deploy
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    HEROKU_APP_NAME: labs-management
+    HEROKU_REGISTRY_IMAGE: registry.heroku.com/${HEROKU_APP_NAME}/web
+  script:
+    - apk add --no-cache curl
+    - cd app
+    - docker build
+        --tag $HEROKU_REGISTRY_IMAGE
+        --file ./app/Dockerfile.prod
+        "."
+    - docker login -u _ -p $HEROKU_AUTH_TOKEN registry.heroku.com
+    - docker push $HEROKU_REGISTRY_IMAGE
+    - cd ..
+    - chmod +x ./release.sh
+    - ./release.sh
