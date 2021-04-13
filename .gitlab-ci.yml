@@ -50,3 +50,5 @@ deploy:
     - cd ..
     - chmod +x ./release.sh
     - ./release.sh
+  only:
+    - main
