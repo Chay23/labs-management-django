@@ -27,22 +27,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_instructor(self, email: str, password: str = None) -> User:
-        """
-        Same as create_user(), but sets is_instructor to True.
-        Args:
-            email: email field value
-            password: password field value
-        Returns:
-        """
-        user = self.create_user(
-            email,
-            password=password,
-        )
-        user.is_instructor = True
-        user.save(using=self._db)
-        return user
-
     def create_superuser(self, email: str, password: str = None) -> User:
         """
         Same as create_user(), but sets is_instructor and is_superuser to True.
