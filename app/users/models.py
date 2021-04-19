@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from study_groups.models import StudyGroup
+from subjects.models import Subject
 
 from .managers import UserManager
 
@@ -53,7 +54,7 @@ class InstructorProfile(models.Model):
     )
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    subject = models.CharField(max_length=100)
+    subject = models.ManyToManyField(Subject, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

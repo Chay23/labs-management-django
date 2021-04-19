@@ -7,7 +7,7 @@ class Subject(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, on_delete=models.CASCADE)
-    group = models.ManyToManyField(StudyGroup)
+    group = models.ManyToManyField(StudyGroup, blank=True)
 
     class Meta:
         constraints = [

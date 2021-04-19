@@ -14,7 +14,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class InstructorProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "first_name", "last_name", "subject")
+    list_display = ("user", "first_name", "last_name")
     search_fields = ("user__name", "first_name", "last_name",)
 
 
