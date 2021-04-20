@@ -1,7 +1,8 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from .views import UsersViewSet, UserProfileViewSet, InstructorProfileViewSet, UserProfileByStudyGroup
+from .views import UsersViewSet, UserProfileViewSet, InstructorProfileViewSet, UserProfileByStudyGroup, \
+    UserCreateView
 
 router = routers.DefaultRouter()
 router.register("users", UsersViewSet, basename="user")
@@ -10,5 +11,6 @@ router.register("instructors", InstructorProfileViewSet, basename="instructor-pr
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('users/group/<str:group>/', UserProfileByStudyGroup.as_view(), name="user-group-list"),
+    path('users/group/<int:group_id>/', UserProfileByStudyGroup.as_view(), name="user-group-list"),
+    path('create-profile/', UserCreateView.as_view(), name="user-profile-create")
 ]
