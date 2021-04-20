@@ -10,12 +10,12 @@ class UserAdmin(admin.ModelAdmin):
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ("user", "first_name", "last_name", "group")
-    search_fields = ("user__name", "first_name", "last_name", "group__name",)
+    search_fields = ("user__email", "first_name", "last_name", "group__name",)
 
 
 class InstructorProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "first_name", "last_name", "subject")
-    search_fields = ("user__name", "first_name", "last_name",)
+    list_display = ("user", "first_name", "last_name")
+    search_fields = ("user__email", "first_name", "last_name",)
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
