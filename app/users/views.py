@@ -42,7 +42,8 @@ class UserCreateView(APIView):
     def post(self, request):
         serializer = UserWithProfileSerializer(data=request.data)
         if User.objects.filter(email=request.data["email"]):
-            return Response({"details": "Користувач з такою електронною поштою уже зареєстрований"})
+            return Response({"details": "Користувач з такою електронною поштою уже зареєстрований"},
+                            status=status.HTTP_400_BAD_REQUEST)
         if serializer.is_valid():
             serializer.save()
             response = {
@@ -52,4 +53,4 @@ class UserCreateView(APIView):
                 "group": request.data["group"]
             }
             return Response(response, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"details": "Невірно введені дані"}, status=status.HTTP_400_BAD_REQUEST)
