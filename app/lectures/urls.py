@@ -9,5 +9,5 @@ router.register("", LectureViewSet, basename='lecture')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('list/<str:subject>/', LecturesBySubjectList.as_view(), name='lectures-by-subject-list')
+    path('subject/<int:subject_id>/', LecturesBySubjectList.as_view(), name='lectures-by-subject-list')
 ]

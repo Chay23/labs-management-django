@@ -9,5 +9,5 @@ router.register("", AssigmentViewSet, basename='assignment')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('list/<str:subject>/', AssignmentsBySubjectList.as_view(), name='assignments-by-subject-list')
+    path('subject/<int:subject_id>/', AssignmentsBySubjectList.as_view(), name='assignments-by-subject-list')
 ]

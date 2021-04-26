@@ -12,9 +12,8 @@ from .serializers import AssignmentSerializer
 @permission_classes([IsAuthenticated])
 class AssignmentsBySubjectList(APIView):
     def get(self, request, *args, **kwargs):
-        subject_title = kwargs.get("subject", "")
-        subject = Subject.objects.get(title=subject_title)
-        assignments = Assignment.objects.filter(subject=subject)
+        subject_id = kwargs.get("subject_id", "")
+        assignments = Assignment.objects.filter(subject=subject_id)
         serializer = AssignmentSerializer(assignments, many=True)
         return Response(serializer.data)
 
