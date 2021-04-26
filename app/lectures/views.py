@@ -12,9 +12,8 @@ from .serializers import LectureSerializer
 @permission_classes([IsAuthenticated])
 class LecturesBySubjectList(APIView):
     def get(self, request, *args, **kwargs):
-        subject_title = kwargs.get("subject", "")
-        subject = Subject.objects.get(title=subject_title)
-        lectures = Lecture.objects.filter(subject=subject)
+        subject_id = kwargs.get("subject_id", "")
+        lectures = Lecture.objects.filter(subject=subject_id)
         serializer = LectureSerializer(lectures, many=True)
         return Response(serializer.data)
 
