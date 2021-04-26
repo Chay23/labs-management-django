@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
     group = StudyGroupSerializer(read_only=True)
 
     class Meta:
