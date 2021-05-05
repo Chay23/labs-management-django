@@ -5,7 +5,7 @@ from study_groups.models import StudyGroup
 
 class Subject(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(max_length=512)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, on_delete=models.CASCADE)
     group = models.ManyToManyField(StudyGroup, blank=True)
 

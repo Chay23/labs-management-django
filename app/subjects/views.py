@@ -10,10 +10,19 @@ from .serializers import SubjectSerializer
 
 
 @permission_classes([IsAuthenticated])
-class SubjectsList(APIView):
+class SubjectsByGroupList(APIView):
     def get(self, request):
         user_profile = UserProfile.objects.get(user=request.user.id)
         subjects = Subject.objects.filter(group=user_profile.group)
+        serializer = SubjectSerializer(subjects, many=True)
+        return Response(serializer.data)
+
+
+@permission_classes([IsAuthenticated])
+class SubjectsByUserList(APIView):
+    def get(self, request):
+        user = request.user.id
+        subjects = Subject.objects.filter(created_by=user)
         serializer = SubjectSerializer(subjects, many=True)
         return Response(serializer.data)
 
