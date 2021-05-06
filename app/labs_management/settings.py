@@ -29,6 +29,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://labs-management-react.herokuapp.com"
 ]
 
 # Application definition
