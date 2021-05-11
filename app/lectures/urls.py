@@ -4,7 +4,6 @@ from rest_framework import routers
 from .views import LectureViewSet, LecturesBySubjectList
 
 router = routers.DefaultRouter()
-
 router.register("", LectureViewSet, basename='lecture')
 
 urlpatterns = [

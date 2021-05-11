@@ -19,6 +19,6 @@ class AssignmentsBySubjectList(APIView):
 
 
 @permission_classes([IsAuthenticated])
-class AssigmentViewSet(viewsets.ModelViewSet):
+class AssignmentViewSet(viewsets.ModelViewSet):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer

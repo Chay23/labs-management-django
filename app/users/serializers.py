@@ -20,7 +20,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ("user", "first_name", "last_name", "group")
 
 
-class UserWithProfileSerializer(serializers.Serializer):
+class CreateUserSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
     first_name = serializers.CharField()

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import User, UserProfile, InstructorProfile
-from .serializers import UserSerializer, UserProfileSerializer, InstructorProfileSerializer, UserWithProfileSerializer
+from .serializers import UserSerializer, UserProfileSerializer, InstructorProfileSerializer, CreateUserSerializer
 
 
 @permission_classes([IsAuthenticated])
@@ -35,12 +35,12 @@ class UserProfileByStudyGroup(APIView):
         return Response(serializer.data)
 
 
-class UserCreateView(APIView):
+class CreateUserView(APIView):
     permission_classes = []
     authentication_classes = []
 
     def post(self, request):
-        serializer = UserWithProfileSerializer(data=request.data)
+        serializer = CreateUserSerializer(data=request.data)
         if User.objects.filter(email=request.data["email"]):
             return Response({"details": "Користувач з такою електронною поштою уже зареєстрований"},
                             status=status.HTTP_400_BAD_REQUEST)

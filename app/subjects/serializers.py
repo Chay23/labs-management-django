@@ -11,5 +11,5 @@ class SubjectSerializer(serializers.ModelSerializer):
         validators = [UniqueTogetherValidator(
             queryset=Subject.objects.all(),
             fields=['title'],
-            message="Subject with this title already exists",
+            message="Предмет з даною назвою уже існує",
         )]

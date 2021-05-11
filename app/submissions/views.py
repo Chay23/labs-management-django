@@ -10,13 +10,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Submission
-from .serializers import SubmissionSerializer, SubmissionSerializerUpdate
+from .serializers import SubmissionSerializer
 
 
 @permission_classes([IsAuthenticated])
 class SubmissionsByAssignmentList(APIView):
     def get(self, request, *args, **kwargs):
-        assignment_id = kwargs.get("id", "")
+        assignment_id = kwargs.get("assignment_id", "")
         submissions = Submission.objects.filter(assignment=assignment_id)
         serializer = SubmissionSerializer(submissions, many=True)
         return Response(serializer.data)
@@ -34,8 +34,8 @@ class SubmissionByUserId(APIView):
     def put(self, request, *args, **kwargs):
         assignment_id = int(kwargs.get("assignment_id", ""))
         user_id = int(kwargs.get("user_id", ""))
-        submission = Submission.objects.get(id=assignment_id)
-        serializer = SubmissionSerializerUpdate(submission, data=request.data)
+        submission = Submission.objects.get(id=assignment_id, created_by=user_id)
+        serializer = SubmissionSerializer(submission, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
