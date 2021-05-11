@@ -1,11 +1,10 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from .views import AssignmentsBySubjectList, AssigmentViewSet
+from .views import AssignmentsBySubjectList, AssignmentViewSet
 
 router = routers.DefaultRouter()
-
-router.register("", AssigmentViewSet, basename='assignment')
+router.register("", AssignmentViewSet, basename='assignment')
 
 urlpatterns = [
     path('', include(router.urls)),
