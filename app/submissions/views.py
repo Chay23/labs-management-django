@@ -8,6 +8,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.http import FileResponse
 
 from .models import Submission
 from .serializers import SubmissionSerializer
@@ -47,11 +48,9 @@ class FileDownloadAPIView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         filename = kwargs.get("filename", "")
         queryset = get_object_or_404(Submission, attached_file__contains=filename)
+        print("FILENAME", filename)
         document = queryset.attached_file.open()
-        response = HttpResponse(
-            FileWrapper(document), content_type="application/msword"
-        )
-        response["Content-Disposition"] = f"attachment; filename={filename}"
+        response = FileResponse(document, as_attachment=True)
         return response
 
 
