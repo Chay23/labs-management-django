@@ -1,6 +1,4 @@
-from wsgiref.util import FileWrapper
-
-from django.http import HttpResponse
+from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework import viewsets
@@ -8,7 +6,6 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.http import FileResponse
 
 from .models import Submission
 from .serializers import SubmissionSerializer
@@ -43,12 +40,11 @@ class SubmissionByUserId(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAuthenticated])
 class FileDownloadAPIView(generics.RetrieveAPIView):
+
     def get(self, request, *args, **kwargs):
         filename = kwargs.get("filename", "")
         queryset = get_object_or_404(Submission, attached_file__contains=filename)
-        print("FILENAME", filename)
         document = queryset.attached_file.open()
         response = FileResponse(document, as_attachment=True)
         return response
