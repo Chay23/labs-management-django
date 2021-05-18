@@ -8,7 +8,8 @@ from .models import User, UserProfile, InstructorProfile
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ("id", "email", "is_instructor", "is_student")
+        fields = ("id", "email", "password", "is_instructor", "is_student")
+        extra_kwargs = {"password": {"write_only": True, "min_length": 8}}
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
